@@ -1,3 +1,21 @@
+def tampilkan_menu():
+    print("1. Tambah pemasukan")
+    print("2. Tambah pengeluaran")
+    print("3. Lihat saldo")
+    print("4. Keluar")
+
+
+def tambah_pemasukan(saldo, jumlah_pemasukan):
+    saldo += jumlah_pemasukan
+    return saldo
+
+
+def tambah_pengeluaran(saldo, jumlah_pengeluaran):
+    saldo -= jumlah_pengeluaran
+    return saldo
+
+
+
 nama_app = "Money Tracking App"
 nama_user = input("Masukkan nama Anda: ")
 mata_uang = "IDR"
@@ -9,24 +27,21 @@ print(f"Selamat datang, {nama_user}!")
 print(f"\n\n========== {nama_app} ==========\n")
 print("Menu Aplikasi:\n")
 while True:
-    print("1. Tambah pemasukan:")
-    print("2. Tambah Pengeluaran:")
-    print("3. Lihat saldo:")
-    print("4. Keluar")
+    tampilkan_menu()
     menu = input("Pilih menu (1/2/3/4): ")
     if menu == "1":
         jumlah_pemasukan = int(input("Masukkan jumlah pemasukan: "))
-        saldo += jumlah_pemasukan
-        print(f"Pemasukan berhasil ditambahkan. Saldo Anda saat ini: {mata_uang} {saldo}")
+        saldo = tambah_pemasukan(saldo, jumlah_pemasukan)
+        print(f"Pemasukan berhasil ditambahkan. Saldo Anda saat ini: {mata_uang} {saldo}\n\n")
     elif menu == "2":
-        saldo_kurang = int(input("Silakan masukkan jumlah pengeluaran: "))
-        if jumlah_pemasukan > saldo:
+        jumlah_pengeluaran = int(input("Silakan masukkan jumlah pengeluaran: "))
+        if jumlah_pengeluaran > saldo:
             print("Maaf, saldo Anda tidak cukup untuk melakukan pengeluaran ini.")
         else:
-            saldo -= jumlah_pemasukan
-            print(f"Pengeluaran berhasil ditambahkan. Saldo Anda saat ini: {mata_uang} {saldo}")
+            saldo = tambah_pengeluaran(saldo, jumlah_pengeluaran)
+            print(f"Pengeluaran berhasil ditambahkan. Saldo Anda saat ini: {mata_uang} {saldo}\n\n")
     elif menu == "3":
-        print(f"Saldo Anda saat ini: {mata_uang} {saldo}")
+        print(f"Saldo Anda saat ini: {mata_uang} {saldo}\n\n")
     elif menu == "4":
         print("Terima kasih telah menggunakan aplikasi ini!")
         break
