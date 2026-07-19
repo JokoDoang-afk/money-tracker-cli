@@ -10,6 +10,18 @@ def tampilkan_menu():
     print("5. Keluar\n")
 
 
+def input_jumlah(pesan):
+    while True:
+        try:
+            jumlah = int(input(pesan))
+            if jumlah <= 0:
+                print("Jumlah tidak boleh negatif atau nol. Silakan coba lagi.\n\n")
+                continue
+            return jumlah
+        except ValueError:
+            print("Input tidak valid. Silakan masukkan angka.\n\n")
+
+
 def lihat_riwayat_transaksi():
     if not riwayat_transaksi:
         print("Belum ada transaksi yang dilakukan.\n\n")
@@ -36,19 +48,23 @@ while True:
     tampilkan_menu()
     menu = input("Pilih menu (1/2/3/4/5): ")
     if menu == "1":
-        jumlah_pemasukan = int(input("Masukkan jumlah pemasukan: "))
-        kategori_pemasukan = input("Masukkan kategori pemasukan: ") 
-        saldo = transactions.tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan, riwayat_transaksi)
-        print(f"Pemasukan berhasil ditambahkan. Saldo Anda saat ini: {mata_uang} {saldo}\n\n")
+            jumlah_pemasukan = input_jumlah("Masukkan jumlah pemasukan: ")
+            kategori_pemasukan = input("Masukkan kategori pemasukan: ") 
+            saldo = transactions.tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan, riwayat_transaksi)
+            print("------------------------------")
+            print(f"Pemasukan berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo}\n")
+            print("------------------------------")
 
     elif menu == "2":
-        jumlah_pengeluaran = int(input("Silakan masukkan jumlah pengeluaran: "))
-        kategori_pengeluaran = input("Masukkan kategori pengeluaran: ")
-        if jumlah_pengeluaran > saldo:
-            print("Maaf, saldo Anda tidak cukup untuk melakukan pengeluaran ini.")
-        else:
-            saldo = transactions.tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran, riwayat_transaksi)
-            print(f"Pengeluaran berhasil ditambahkan. Saldo Anda saat ini: {mata_uang} {saldo}\n\n")
+            jumlah_pengeluaran = input_jumlah("Silakan masukkan jumlah pengeluaran: ")
+            kategori_pengeluaran = input("Masukkan kategori pengeluaran: ")
+            if jumlah_pengeluaran > saldo:
+                print("Maaf, saldo Anda tidak cukup untuk melakukan pengeluaran ini.")
+            else:
+                saldo = transactions.tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran, riwayat_transaksi)
+                print("------------------------------")
+                print(f"Pengeluaran berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo}\n")
+                print("------------------------------")
 
     elif menu == "3":
         print(f"Saldo Anda saat ini: {mata_uang} {saldo}\n\n")

@@ -8,5 +8,25 @@
         "jenis": "pengeluaran",
         "jumlah": 5000,
         "kategori": "makan"
+    },
+    {
+        "jenis": "pemasukan",
+        "jumlah": 0,
+        "kategori": "sdsa"
+    },
+    {
+        "jenis": "pemasukan",
+        "jumlah": 20000,
+        "kategori": "Gaji"
+    },
+    {
+        "jenis": "pemasukan",
+        "jumlah": 25200,
+        "kategori": "Gaji"
+    },
+    {
+        "jenis": "pengeluaran",
+        "jumlah": 1000,
+        "kategori": "jajan"
     }
 ]
