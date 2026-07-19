@@ -6,15 +6,15 @@ def tampilkan_menu():
     print("5. Keluar\n")
 
 
-def tambah_pemasukan(saldo, jumlah_pemasukan):
+def tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan):
     saldo += jumlah_pemasukan
-    riwayat_transaksi.append(("pemasukan", jumlah_pemasukan))
+    riwayat_transaksi.append(("pemasukan", jumlah_pemasukan, kategori_pemasukan))
     return saldo
 
 
-def tambah_pengeluaran(saldo, jumlah_pengeluaran):
+def tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran):
     saldo -= jumlah_pengeluaran
-    riwayat_transaksi.append(("pengeluaran", jumlah_pengeluaran))
+    riwayat_transaksi.append(("pengeluaran", jumlah_pengeluaran, kategori_pengeluaran))
     return saldo
 
 
@@ -34,15 +34,17 @@ while True:
     menu = input("Pilih menu (1/2/3/4/5): ")
     if menu == "1":
         jumlah_pemasukan = int(input("Masukkan jumlah pemasukan: "))
-        saldo = tambah_pemasukan(saldo, jumlah_pemasukan)
+        kategori_pemasukan = input("Masukkan kategori pemasukan: ") 
+        saldo = tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan)
         print(f"Pemasukan berhasil ditambahkan. Saldo Anda saat ini: {mata_uang} {saldo}\n\n")
 
     elif menu == "2":
         jumlah_pengeluaran = int(input("Silakan masukkan jumlah pengeluaran: "))
+        kategori_pengeluaran = input("Masukkan kategori pengeluaran: ")
         if jumlah_pengeluaran > saldo:
             print("Maaf, saldo Anda tidak cukup untuk melakukan pengeluaran ini.")
         else:
-            saldo = tambah_pengeluaran(saldo, jumlah_pengeluaran)
+            saldo = tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran)
             print(f"Pengeluaran berhasil ditambahkan. Saldo Anda saat ini: {mata_uang} {saldo}\n\n")
 
     elif menu == "3":
@@ -54,8 +56,8 @@ while True:
         else:
             print("Riwayat Transaksi:")
             for transaksi in riwayat_transaksi:
-                jenis, jumlah = transaksi
-                print(f"{jenis.capitalize()}: {mata_uang} {jumlah}\n\n")
+                jenis, jumlah, kategori = transaksi
+                print(f"{jenis.capitalize()}: {mata_uang} {jumlah} - {kategori}\n\n")
 
     elif menu == "5":
         print("Terima kasih telah menggunakan aplikasi ini!")
