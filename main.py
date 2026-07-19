@@ -8,13 +8,21 @@ def tampilkan_menu():
 
 def tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan):
     saldo += jumlah_pemasukan
-    riwayat_transaksi.append(("pemasukan", jumlah_pemasukan, kategori_pemasukan))
+    riwayat_transaksi.append({
+        "jenis": "pemasukan",
+        "jumlah": jumlah_pemasukan,
+        "kategori": kategori_pemasukan
+    })
     return saldo
 
 
 def tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran):
     saldo -= jumlah_pengeluaran
-    riwayat_transaksi.append(("pengeluaran", jumlah_pengeluaran, kategori_pengeluaran))
+    riwayat_transaksi.append({
+    "jenis": "pengeluaran",
+    "jumlah": jumlah_pengeluaran,
+    "kategori": kategori_pengeluaran
+})
     return saldo
 
 
@@ -56,8 +64,10 @@ while True:
         else:
             print("Riwayat Transaksi:")
             for transaksi in riwayat_transaksi:
-                jenis, jumlah, kategori = transaksi
-                print(f"{jenis.capitalize()}: {mata_uang} {jumlah} - {kategori}\n\n")
+                print(transaksi["jenis"])
+                print(transaksi["jumlah"])
+                print(transaksi["kategori"])
+                    
 
     elif menu == "5":
         print("Terima kasih telah menggunakan aplikasi ini!")
