@@ -1,14 +1,6 @@
-import json
+import storage
+import transactions
 
-
-def load_data():
-    with open("data.json", "r") as file:
-        data = json.load(file)
-    return data
-
-def save_data(data):
-    with open("data.json", "w") as file:
-        json.dump(data, file, indent=4)
 
 def tampilkan_menu():
     print("1. Tambah pemasukan")
@@ -18,56 +10,23 @@ def tampilkan_menu():
     print("5. Keluar\n")
 
 
-def tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan):
-    saldo += jumlah_pemasukan
-    transaksi = {
-        "jenis": "pemasukan",
-        "jumlah": jumlah_pemasukan,
-        "kategori": kategori_pemasukan
-    }
-    riwayat_transaksi.append(transaksi)
-    save_data(riwayat_transaksi)
-    return saldo
-    
-
-
-def tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran):
-    saldo -= jumlah_pengeluaran
-    transaksi = {
-        "jenis": "pengeluaran",
-        "jumlah": jumlah_pengeluaran,
-        "kategori": kategori_pengeluaran
-    }
-    riwayat_transaksi.append(transaksi)
-    save_data(riwayat_transaksi)
-    return saldo
-
-
-def hitung_saldo(riwayat_transaksi):
-    saldo = 0
-    for transaksi in riwayat_transaksi:
-        if transaksi["jenis"] == "pemasukan":
-            saldo += transaksi["jumlah"]
-        elif transaksi["jenis"] == "pengeluaran":
-            saldo -= transaksi["jumlah"]
-    return saldo
-
 def lihat_riwayat_transaksi():
     if not riwayat_transaksi:
         print("Belum ada transaksi yang dilakukan.\n\n")
     else:
         print("Riwayat Transaksi:")
         for transaksi in riwayat_transaksi:
-            print(transaksi["jenis"])
-            print(transaksi["jumlah"])
-            print(transaksi["kategori"])
+            print(f"Jenis    : {transaksi['jenis'].capitalize()}")
+            print(f"Jumlah   : {mata_uang} {transaksi['jumlah']}")
+            print(f"Kategori : {transaksi['kategori'].title()}")
+            print("------------------------------")
 
 
 nama_app = "Money Tracking App"
 nama_user = input("Masukkan nama Anda: ")
 mata_uang = "IDR"
-riwayat_transaksi = load_data()
-saldo = hitung_saldo(riwayat_transaksi)
+riwayat_transaksi = storage.load_data()
+saldo = transactions.hitung_saldo(riwayat_transaksi)
 
 
 print(f"Selamat datang, {nama_user}!")
@@ -79,7 +38,7 @@ while True:
     if menu == "1":
         jumlah_pemasukan = int(input("Masukkan jumlah pemasukan: "))
         kategori_pemasukan = input("Masukkan kategori pemasukan: ") 
-        saldo = tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan)
+        saldo = transactions.tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan, riwayat_transaksi)
         print(f"Pemasukan berhasil ditambahkan. Saldo Anda saat ini: {mata_uang} {saldo}\n\n")
 
     elif menu == "2":
@@ -88,7 +47,7 @@ while True:
         if jumlah_pengeluaran > saldo:
             print("Maaf, saldo Anda tidak cukup untuk melakukan pengeluaran ini.")
         else:
-            saldo = tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran)
+            saldo = transactions.tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran, riwayat_transaksi)
             print(f"Pengeluaran berhasil ditambahkan. Saldo Anda saat ini: {mata_uang} {saldo}\n\n")
 
     elif menu == "3":

@@ -1,12 +1,12 @@
 [
     {
         "jenis": "pemasukan",
-        "jumlah": 50000,
+        "jumlah": 25222,
         "kategori": "Gaji"
     },
     {
         "jenis": "pengeluaran",
-        "jumlah": 10000,
-        "kategori": "jajan"
+        "jumlah": 5000,
+        "kategori": "makan"
     }
 ]
