@@ -1,3 +1,15 @@
+import json
+
+
+def load_data():
+    with open("data.json", "r") as file:
+        data = json.load(file)
+    return data
+
+def save_data(data):
+    with open("data.json", "w") as file:
+        json.dump(data, file, indent=4)
+
 def tampilkan_menu():
     print("1. Tambah pemasukan")
     print("2. Tambah pengeluaran")
@@ -14,7 +26,9 @@ def tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan):
         "kategori": kategori_pemasukan
     }
     riwayat_transaksi.append(transaksi)
+    save_data(riwayat_transaksi)
     return saldo
+    
 
 
 def tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran):
@@ -25,12 +39,22 @@ def tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran):
         "kategori": kategori_pengeluaran
     }
     riwayat_transaksi.append(transaksi)
+    save_data(riwayat_transaksi)
     return saldo
 
 
+def hitung_saldo(riwayat_transaksi):
+    saldo = 0
+    for transaksi in riwayat_transaksi:
+        if transaksi["jenis"] == "pemasukan":
+            saldo += transaksi["jumlah"]
+        elif transaksi["jenis"] == "pengeluaran":
+            saldo -= transaksi["jumlah"]
+    return saldo
+
 def lihat_riwayat_transaksi():
     if not riwayat_transaksi:
-            print("Belum ada transaksi yang dilakukan.\n\n")
+        print("Belum ada transaksi yang dilakukan.\n\n")
     else:
         print("Riwayat Transaksi:")
         for transaksi in riwayat_transaksi:
@@ -42,8 +66,8 @@ def lihat_riwayat_transaksi():
 nama_app = "Money Tracking App"
 nama_user = input("Masukkan nama Anda: ")
 mata_uang = "IDR"
-saldo = 15000
-riwayat_transaksi = []
+riwayat_transaksi = load_data()
+saldo = hitung_saldo(riwayat_transaksi)
 
 
 print(f"Selamat datang, {nama_user}!")

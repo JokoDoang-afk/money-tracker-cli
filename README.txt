@@ -1,0 +1,70 @@
+# Money Tracker CLI
+
+## Description
+
+Money Tracker CLI is a simple command-line application that helps users manage their income and expenses. By recording every transaction, users can easily track their spending habits and understand where their money goes.
+
+## Features
+
+- Add income
+- Add expense
+- Categorize transactions
+- View balance
+- View transaction history
+
+## Technologies
+
+- Python 3.x
+- Git
+- GitHub
+
+## Installation
+
+1. Clone this repository
+
+```bash
+git clone https://github.com/JokoDoang-afk/money-tracker-cli.git
+```
+
+2. Go to the project folder
+
+```bash
+cd money-tracker-cli
+```
+
+3. Run the application
+
+```bash
+python main.py
+```
+
+## Usage
+
+After running the application, choose one of the available menu options.
+
+Example:
+
+```text
+===== Money Tracker =====
+1. Add Income
+2. Add Expense
+3. View Balance
+4. View Transaction History
+5. Exit
+```
+
+## Project Structure
+
+money-tracker-cli/
+│
+├── main.py
+├── README.md
+
+## Future Features
+
+- Save data using JSON
+- Monthly reports
+- Search transactions
+- Edit transactions
+- Delete transactions
+- Export to CSV

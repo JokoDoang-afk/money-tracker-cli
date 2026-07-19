@@ -1,0 +1,12 @@
+[
+    {
+        "jenis": "pemasukan",
+        "jumlah": 50000,
+        "kategori": "Gaji"
+    },
+    {
+        "jenis": "pengeluaran",
+        "jumlah": 10000,
+        "kategori": "jajan"
+    }
+]
