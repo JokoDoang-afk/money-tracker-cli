@@ -8,23 +8,35 @@ def tampilkan_menu():
 
 def tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan):
     saldo += jumlah_pemasukan
-    riwayat_transaksi.append({
+    transaksi = {
         "jenis": "pemasukan",
         "jumlah": jumlah_pemasukan,
         "kategori": kategori_pemasukan
-    })
+    }
+    riwayat_transaksi.append(transaksi)
     return saldo
 
 
 def tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran):
     saldo -= jumlah_pengeluaran
-    riwayat_transaksi.append({
-    "jenis": "pengeluaran",
-    "jumlah": jumlah_pengeluaran,
-    "kategori": kategori_pengeluaran
-})
+    transaksi = {
+        "jenis": "pengeluaran",
+        "jumlah": jumlah_pengeluaran,
+        "kategori": kategori_pengeluaran
+    }
+    riwayat_transaksi.append(transaksi)
     return saldo
 
+
+def lihat_riwayat_transaksi():
+    if not riwayat_transaksi:
+            print("Belum ada transaksi yang dilakukan.\n\n")
+    else:
+        print("Riwayat Transaksi:")
+        for transaksi in riwayat_transaksi:
+            print(transaksi["jenis"])
+            print(transaksi["jumlah"])
+            print(transaksi["kategori"])
 
 
 nama_app = "Money Tracking App"
@@ -59,14 +71,8 @@ while True:
         print(f"Saldo Anda saat ini: {mata_uang} {saldo}\n\n")
         
     elif menu == "4":
-        if not riwayat_transaksi:
-            print("Belum ada transaksi yang dilakukan.\n\n")
-        else:
-            print("Riwayat Transaksi:")
-            for transaksi in riwayat_transaksi:
-                print(transaksi["jenis"])
-                print(transaksi["jumlah"])
-                print(transaksi["kategori"])
+        lihat_riwayat_transaksi()
+        print("\n\n")
                     
 
     elif menu == "5":
