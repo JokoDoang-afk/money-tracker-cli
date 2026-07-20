@@ -26,7 +26,7 @@ def input_jumlah(pesan):
             print("Input tidak valid. Silakan masukkan angka.\n\n")
 
 
-def lihat_riwayat_transaksi():
+def lihat_riwayat_transaksi(riwayat_transaksi, mata_uang):
     if not riwayat_transaksi:
         print("Belum ada transaksi yang dilakukan.\n\n")
     else:
@@ -75,7 +75,7 @@ while True:
         print(f"Saldo saat ini: Rp {saldo:,}".replace(",", "."))    
         
     elif menu == "4":
-        lihat_riwayat_transaksi()
+        lihat_riwayat_transaksi(riwayat_transaksi, mata_uang)
         print("\n\n")
                     
     elif menu == "5":
@@ -135,8 +135,8 @@ while True:
                         index_edit,
                         kategori_baru=kategori_baru
                     )
-                    storage.save_data(riwayat_transaksi)
                     print("Kategori transaksi berhasil diperbarui.\n\n")
+                    
                 elif pilihan_edit == "3":
                     jumlah_baru = input_jumlah("Masukkan jumlah transaksi baru: ")
                     kategori_baru = input("Masukkan kategori transaksi baru: ").strip()
@@ -150,7 +150,6 @@ while True:
                         kategori_baru=kategori_baru
                     )
                     saldo = transactions.hitung_saldo(riwayat_transaksi)
-                    storage.save_data(riwayat_transaksi)
                     print("Transaksi berhasil diperbarui.\n\n")
                 else:
                     print("Opsi yang Anda pilih tidak valid.\n\n")

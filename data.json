@@ -18,5 +18,25 @@
         "jenis": "pemasukan",
         "jumlah": 1000000,
         "kategori": "gaji"
+    },
+    {
+        "jenis": "pemasukan",
+        "jumlah": 80000,
+        "kategori": "uang masuk"
+    },
+    {
+        "jenis": "pengeluaran",
+        "jumlah": 75000,
+        "kategori": "makan"
+    },
+    {
+        "jenis": "pemasukan",
+        "jumlah": 2525,
+        "kategori": ""
+    },
+    {
+        "jenis": "pengeluaran",
+        "jumlah": 5255,
+        "kategori": "   "
     }
 ]
