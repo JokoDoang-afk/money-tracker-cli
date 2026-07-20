@@ -44,7 +44,15 @@ def edit_transaksi(
 
     if jumlah_baru is not None:
         transaksi["jumlah"] = jumlah_baru
-    if kategori_baru:
+    if kategori_baru is not None:
         transaksi["kategori"] = kategori_baru
 
     storage.save_data(riwayat_transaksi)
+
+def input_kategori(pesan):
+    while True:
+        kategori = input(pesan).strip()
+        if not kategori:
+            print("Kategori tidak boleh kosong. Silakan coba lagi.\n")
+            continue
+        return kategori

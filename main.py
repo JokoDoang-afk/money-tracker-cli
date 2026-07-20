@@ -1,5 +1,3 @@
-from operator import index
-
 import storage
 import transactions
 
@@ -52,9 +50,9 @@ while True:
     tampilkan_menu()
     menu = input("Pilih menu (1/2/3/4/5/6/7): ")
     if menu == "1":
-        jumlah_baru = input_jumlah("Masukkan jumlah transaksi baru: ")
+        jumlah_pemasukan = input_jumlah("Masukkan jumlah transaksi baru: ")
         kategori_pemasukan = input("Masukkan kategori pemasukan: ")
-        saldo = transactions.tambah_pemasukan(saldo, jumlah_baru, kategori_pemasukan, riwayat_transaksi)
+        saldo = transactions.tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan, riwayat_transaksi)
         print("------------------------------")
         print(f"Pemasukan berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo:,}\n")
         print("------------------------------")
