@@ -3,5 +3,10 @@
         "jenis": "pemasukan",
         "jumlah": 2500000,
         "kategori": "gaji"
+    },
+    {
+        "jenis": "pemasukan",
+        "jumlah": 2000000,
+        "kategori": "Gaji"
     }
 ]

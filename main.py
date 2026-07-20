@@ -2,6 +2,7 @@ import storage
 import transactions
 import utils
 
+
 def tampilkan_menu():
     print("1. Tambah pemasukan")
     print("2. Tambah pengeluaran")
@@ -56,7 +57,7 @@ while True:
         kategori_pemasukan = input("Masukkan kategori pemasukan: ")
         saldo = transactions.tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan, riwayat_transaksi)
         print("------------------------------")
-        print(f"Pemasukan berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo:,}\n")
+        print(f"Pemasukan berhasil ditambahkan. \nSaldo Anda saat ini: {utils.format_currency(mata_uang, saldo)}\n")
         print("------------------------------")
 
     elif menu == "2":
@@ -67,12 +68,12 @@ while True:
         else:
             saldo = transactions.tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran, riwayat_transaksi)
             print("------------------------------")
-            print(f"Pengeluaran berhasil ditambahkan. \nSaldo Anda saat ini: {utils.format_rupiah(mata_uang, saldo)}\n")
+            print(f"Pengeluaran berhasil ditambahkan. \nSaldo Anda saat ini: {utils.format_currency(mata_uang, saldo)}\n")
             print("------------------------------")
 
     elif menu == "3":
         saldo = transactions.hitung_saldo(riwayat_transaksi)
-        print(f"Saldo saat ini: {utils.format_currency(mata_uang, saldo)}")
+        print(f"Saldo saat ini: {utils.format_currency(mata_uang, saldo)}\n")
             
         
     elif menu == "4":
@@ -100,7 +101,7 @@ while True:
             print("Belum ada transaksi yang dilakukan.\n\n")
         else:
             for index_transaksi, transaksi in enumerate(riwayat_transaksi):
-                print(f"{index_transaksi + 1}. Jenis: {transaksi['jenis'].capitalize()}, Jumlah: {mata_uang} {transaksi['jumlah']:,}, Kategori: {transaksi['kategori'].title()}")
+                print(f"{index_transaksi + 1}. Jenis: {transaksi['jenis'].capitalize()}, Jumlah: {utils.format_currency(mata_uang, transaksi["jumlah"])}, Kategori: {transaksi['kategori'].title()}")
             try:
                 index_edit = int(input("\nMasukkan nomor transaksi yang ingin diedit: ")) - 1
                 if index_edit < 0 or index_edit >= len(riwayat_transaksi):
@@ -174,7 +175,7 @@ while True:
 
             if(index_transaksi < 0 or index_transaksi >= len(riwayat_transaksi)):
                 print("Nomor tidak valid \n")
-
+                continue
             transaksi_dipilih = riwayat_transaksi[index_transaksi]
             print("\n=== Transaksi yang Akan Dihapus ===")
             print(
@@ -182,7 +183,7 @@ while True:
                 f"{transaksi_dipilih['jenis'].capitalize()}"
             )
             print(
-                f"Jumlah   : {utils.format_currency(mata_uang, transaksi['jumlah'])}"
+                f"Jumlah   : {utils.format_currency(mata_uang, transaksi_dipilih['jumlah'])}"
             )
             print(
                 f"Kategori : "
