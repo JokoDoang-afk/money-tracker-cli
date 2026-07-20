@@ -33,3 +33,20 @@ def hitung_saldo(riwayat_transaksi):
         elif transaksi["jenis"] == "pengeluaran":
             saldo -= transaksi["jumlah"]
     return saldo
+
+def edit_transaksi(riwayat_transaksi, index, jenis_baru=None, jumlah_baru=None, kategori_baru=None):
+    if index < 0 or index >= len(riwayat_transaksi):
+        print("Indeks transaksi tidak valid.")
+        return
+
+    transaksi = riwayat_transaksi[index]
+
+    if jenis_baru:
+        transaksi["jenis"] = jenis_baru
+    if jumlah_baru is not None:
+        transaksi["jumlah"] = jumlah_baru
+    if kategori_baru:
+        transaksi["kategori"] = kategori_baru
+
+    storage.save_data(riwayat_transaksi)
+    print("Transaksi berhasil diperbarui.")
