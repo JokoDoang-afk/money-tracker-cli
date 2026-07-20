@@ -7,7 +7,9 @@ def tampilkan_menu():
     print("2. Tambah pengeluaran")
     print("3. Lihat saldo")
     print("4. Lihat riwayat transaksi")
-    print("5. Keluar\n")
+    print("5. Cari transaksi berdasarkan kategori")
+    print("6. Edit transaksi")
+    print("7. Keluar\n")
 
 
 def input_jumlah(pesan):
@@ -29,7 +31,7 @@ def lihat_riwayat_transaksi():
         print("Riwayat Transaksi:")
         for transaksi in riwayat_transaksi:
             print(f"Jenis    : {transaksi['jenis'].capitalize()}")
-            print(f"Jumlah   : {mata_uang} {transaksi['jumlah']}")
+            print(f"Jumlah   : {mata_uang} {transaksi['jumlah']:,}")
             print(f"Kategori : {transaksi['kategori'].title()}")
             print("------------------------------")
 
@@ -41,18 +43,18 @@ riwayat_transaksi = storage.load_data()
 saldo = transactions.hitung_saldo(riwayat_transaksi)
 
 
-print(f"Selamat datang, {nama_user}!")
+print(f"Selamat datang, {nama_user.upper()}!")
 print(f"\n\n========== {nama_app} ==========\n")
 print("Menu Aplikasi:\n")
 while True:
     tampilkan_menu()
-    menu = input("Pilih menu (1/2/3/4/5): ")
+    menu = input("Pilih menu (1/2/3/4/5/6/7): ")
     if menu == "1":
             jumlah_pemasukan = input_jumlah("Masukkan jumlah pemasukan: ")
             kategori_pemasukan = input("Masukkan kategori pemasukan: ") 
             saldo = transactions.tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan, riwayat_transaksi)
             print("------------------------------")
-            print(f"Pemasukan berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo}\n")
+            print(f"Pemasukan berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo:,}\n")
             print("------------------------------")
 
     elif menu == "2":
@@ -63,18 +65,73 @@ while True:
             else:
                 saldo = transactions.tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran, riwayat_transaksi)
                 print("------------------------------")
-                print(f"Pengeluaran berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo}\n")
+                print(f"Pengeluaran berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo:,}\n")
                 print("------------------------------")
 
     elif menu == "3":
-        print(f"Saldo Anda saat ini: {mata_uang} {saldo}\n\n")
+        saldo = transactions.hitung_saldo(riwayat_transaksi)
+        print(f"Saldo saat ini: Rp {saldo:,}".replace(",", "."))    
         
     elif menu == "4":
         lihat_riwayat_transaksi()
         print("\n\n")
                     
-
     elif menu == "5":
+        kategori_dicari = input("Masukkan kategori yang ingin dicari: ")
+        ditemukan = False
+        print("=== Search Transaction ===\n\n")
+        for transaksi in riwayat_transaksi:
+            if kategori_dicari.lower() in transaksi["kategori"].lower():
+                print("------------------------------")
+                print(f"Jenis    : {transaksi['jenis'].capitalize()}")
+                print(f"Jumlah   : {mata_uang} {transaksi['jumlah']:,}".replace(",", "."))
+                print(f"Kategori : {transaksi['kategori'].title()}")
+                print("------------------------------")
+                ditemukan = True 
+        if not ditemukan:
+            print("Transaksi dengan kategori tersebut tidak ditemukan.\n\n")
+
+    elif menu == "6":
+        print("=== Edit Transaction ===\n\n")
+        if not riwayat_transaksi:
+            print("Belum ada transaksi yang dilakukan.\n\n")
+        else:
+            for index_transaksi, transaksi in enumerate(riwayat_transaksi):
+                print(f"{index_transaksi + 1}. Jenis: {transaksi['jenis'].capitalize()}, Jumlah: {mata_uang} {transaksi['jumlah']:,}, Kategori: {transaksi['kategori'].title()}")
+            try:
+                index_edit = int(input("\nMasukkan nomor transaksi yang ingin diedit: ")) - 1
+                if index_edit < 0 or index_edit >= len(riwayat_transaksi):
+                    print("Nomor transaksi tidak valid.\n\n")
+                    continue
+                print(f"Anda ingin mengedit apa?")
+                print("1. Jumlah transaksi")
+                print("2. Kategori transaksi")
+                pilihan_edit = input("Pilih opsi (1/2): ")
+                if pilihan_edit == "1":
+                    jumlah_baru = input_jumlah("Masukkan jumlah transaksi baru: ")
+                    transaksi_lama = riwayat_transaksi[index_edit]
+                    if transaksi_lama["jenis"] == "pemasukan":
+                        saldo -= transaksi_lama["jumlah"]
+                        saldo += jumlah_baru
+                    elif transaksi_lama["jenis"] == "pengeluaran":
+                        saldo += transaksi_lama["jumlah"]
+                        saldo -= jumlah_baru
+                    riwayat_transaksi[index_edit]["jumlah"] = jumlah_baru
+                    storage.save_data(riwayat_transaksi)
+                    print("Jumlah transaksi berhasil diperbarui.\n\n")
+                elif pilihan_edit == "2":
+                    kategori_baru = input("Masukkan kategori transaksi baru: ")
+                    riwayat_transaksi[index_edit]["kategori"] = kategori_baru
+                    storage.save_data(riwayat_transaksi)
+                    print("Kategori transaksi berhasil diperbarui.\n\n")
+                else:
+                    print("Opsi yang Anda pilih tidak valid.\n\n")
+            except ValueError:
+                print("Input tidak valid. Silakan masukkan angka.\n\n")
+
+        
+
+    elif menu == "7":
         print("Terima kasih telah menggunakan aplikasi ini!")
         break
     else:

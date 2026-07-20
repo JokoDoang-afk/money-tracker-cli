@@ -1,4 +1,4 @@
-# Money Tracker CLI
+# Money Tracker CLI v0.11
 
 ## Description
 
@@ -12,11 +12,13 @@ Money Tracker CLI is a simple command-line application that helps users manage t
 - View transaction history
 - Calculate balance from transaction history
 - View balance
+- Search Categorize base on transaction
 
 
 ## Technologies
 
 - Python 3.x
+- JSON
 - Git
 - GitHub
 
@@ -63,14 +65,28 @@ money-tracker-cli/
 │
 ├── main.py
 ├── data.json
+├── storage.py
+├── transactions.py
 └── README.md
 
 ## Future Features
 - Monthly reports
-- Search transactions
 - Edit transactions
 - Delete transactions
 - Export to CSV
 - SQLite Database
 - REST API
 - Desktop GUI
+
+## Current Version
+
+Current version: **v0.11**
+
+Implemented features:
+
+- ✅ Add income
+- ✅ Add expense
+- ✅ Transaction history
+- ✅ JSON persistence
+- ✅ Input validation
+- ✅ Modular architecture

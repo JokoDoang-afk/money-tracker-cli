@@ -1,32 +1,22 @@
 [
     {
         "jenis": "pemasukan",
-        "jumlah": 25222,
-        "kategori": "Gaji"
+        "jumlah": 250000,
+        "kategori": "jai"
     },
     {
         "jenis": "pengeluaran",
-        "jumlah": 5000,
-        "kategori": "makan"
-    },
-    {
-        "jenis": "pemasukan",
-        "jumlah": 0,
-        "kategori": "sdsa"
-    },
-    {
-        "jenis": "pemasukan",
-        "jumlah": 20000,
-        "kategori": "Gaji"
-    },
-    {
-        "jenis": "pemasukan",
-        "jumlah": 25200,
-        "kategori": "Gaji"
-    },
-    {
-        "jenis": "pengeluaran",
-        "jumlah": 1000,
+        "jumlah": 100000,
         "kategori": "jajan"
+    },
+    {
+        "jenis": "pemasukan",
+        "jumlah": 25252,
+        "kategori": "gaji"
+    },
+    {
+        "jenis": "pemasukan",
+        "jumlah": 1000000,
+        "kategori": "gaji"
     }
 ]
