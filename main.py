@@ -38,6 +38,15 @@ def lihat_riwayat_transaksi(riwayat_transaksi, mata_uang):
             print("------------------------------")
 
 
+def tampilkan_detail_transaki(transaksi, mata_uang):
+    print(f"Jenis   : {transaksi['jenis'].capitalize()}")
+    print(
+        f"Jumlah    : {mata_uang} "
+        f"{transaksi['jumlah']:,}".replace(",",".")
+    )
+    print(f"Kategori: {transaksi['kategori'].title()}")
+
+
 nama_app = "Money Tracking App"
 nama_user = input("Masukkan nama Anda: ")
 mata_uang = "IDR"
@@ -106,9 +115,12 @@ while True:
                     print("Nomor transaksi tidak valid.\n\n")
                     continue
                 print("\n=== Transaksi yang dipilih ===")
-                print(f"Jenis    : {riwayat_transaksi[index_edit]['jenis'].capitalize()}")
-                print(f"Jumlah   : {mata_uang} {riwayat_transaksi[index_edit]['jumlah']:,}".replace(",", "."))
-                print(f"Kategori : {riwayat_transaksi[index_edit]['kategori'].title()}")
+                transaksi_dipilih = riwayat_transaksi[index_edit]
+
+                tampilkan_detail_transaki(
+                    transaksi_dipilih,
+                    mata_uang
+                )
                 print("===============================")
                 print(f"\nAnda ingin mengedit apa?")
                 print("1. Edit Jumlah transaksi")
@@ -176,17 +188,11 @@ while True:
 
             transaksi_dipilih = riwayat_transaksi[index_transaksi]
             print("\n=== Transaksi yang Akan Dihapus ===")
-            print(
-                f"Jenis    : "
-                f"{transaksi_dipilih['jenis'].capitalize()}"
-            )
-            print(
-                f"Jumlah   : {mata_uang} "
-                f"{transaksi_dipilih['jumlah']:,}".replace(",", ".")
-            )
-            print(
-                f"Kategori : "
-                f"{transaksi_dipilih['kategori'].title()}"
+            transaksi_dipilih = riwayat_transaksi[index_transaksi]
+
+            tampilkan_detail_transaki(
+                transaksi_dipilih,
+                mata_uang
             )
             print("====================================")
 
