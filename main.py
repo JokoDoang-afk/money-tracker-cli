@@ -101,15 +101,16 @@ while True:
             print("Belum ada transaksi yang dilakukan.\n\n")
         else:
             for index_transaksi, transaksi in enumerate(riwayat_transaksi):
-                print(f"{index_transaksi + 1}. Jenis: {transaksi['jenis'].capitalize()}, Jumlah: {utils.format_currency(mata_uang, transaksi["jumlah"])}, Kategori: {transaksi['kategori'].title()}")
+                print(f"{index_transaksi + 1}. Jenis: {transaksi['jenis'].capitalize()}, Jumlah: {utils.format_currency(mata_uang, transaksi['jumlah'])}, Kategori: {transaksi['kategori'].title()}")
             try:
                 index_edit = int(input("\nMasukkan nomor transaksi yang ingin diedit: ")) - 1
                 if index_edit < 0 or index_edit >= len(riwayat_transaksi):
                     print("Nomor transaksi tidak valid.\n\n")
                     continue
+                transaksi_dipilih = riwayat_transaksi[index_edit]
                 print("\n=== Transaksi yang dipilih ===")
                 print(f"Jenis    : {riwayat_transaksi[index_edit]['jenis'].capitalize()}")
-                print(f"Jumlah   : {utils.format_currency(mata_uang, transaksi['jumlah'])}")
+                print(f"Jumlah   : {utils.format_currency(mata_uang, transaksi_dipilih['jumlah'])}")
                 print(f"Kategori : {riwayat_transaksi[index_edit]['kategori'].title()}")
                 print("===============================")
                 print(f"\nAnda ingin mengedit apa?")

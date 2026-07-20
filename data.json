@@ -8,5 +8,15 @@
         "jenis": "pemasukan",
         "jumlah": 2000000,
         "kategori": "Gaji"
+    },
+    {
+        "jenis": "pemasukan",
+        "jumlah": 500000,
+        "kategori": "bonus baru"
+    },
+    {
+        "jenis": "pengeluaran",
+        "jumlah": 250000,
+        "kategori": "jajan"
     }
 ]
