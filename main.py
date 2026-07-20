@@ -9,7 +9,8 @@ def tampilkan_menu():
     print("4. Lihat riwayat transaksi")
     print("5. Cari transaksi berdasarkan kategori")
     print("6. Edit transaksi")
-    print("7. Keluar\n")
+    print("7. Hapus transaksi")
+    print("8. Keluar\n")
 
 
 def input_jumlah(pesan):
@@ -29,10 +30,11 @@ def lihat_riwayat_transaksi(riwayat_transaksi, mata_uang):
         print("Belum ada transaksi yang dilakukan.\n\n")
     else:
         print("Riwayat Transaksi:")
-        for transaksi in riwayat_transaksi:
-            print(f"Jenis    : {transaksi['jenis'].capitalize()}")
-            print(f"Jumlah   : {mata_uang} {transaksi['jumlah']:,}")
-            print(f"Kategori : {transaksi['kategori'].title()}")
+        for nomor, transaksi in enumerate(riwayat_transaksi, start=1):
+            print(f"Nomor   : {nomor}")
+            print(f"Jenis   : {transaksi['jenis'].capitalize()}")
+            print(f"Jumlah  : {mata_uang} {transaksi['jumlah']:,}".replace(",", "."))
+            print(f"Kategori: {transaksi['kategori'].title()}")
             print("------------------------------")
 
 
@@ -48,7 +50,7 @@ print(f"\n\n========== {nama_app} ==========\n")
 print("Menu Aplikasi:\n")
 while True:
     tampilkan_menu()
-    menu = input("Pilih menu (1/2/3/4/5/6/7): ")
+    menu = input("Pilih menu (1/2/3/4/5/6/7/8): ")
     if menu == "1":
         jumlah_pemasukan = input_jumlah("Masukkan jumlah transaksi baru: ")
         kategori_pemasukan = input("Masukkan kategori pemasukan: ")
@@ -154,9 +156,57 @@ while True:
             except ValueError:
                 print("Input tidak valid. Silakan masukkan angka.\n\n")
 
-        
-
     elif menu == "7":
+        print("=== Hapus Transaksi ===")
+        if not riwayat_transaksi:
+            print("Belum ada transaksi yang dilakukan.\n")
+        else:
+            lihat_riwayat_transaksi(
+            riwayat_transaksi,
+            mata_uang
+        )
+
+        try:
+            nomor_transaksi = int(input("\nMasukkan nomor transaksi yang ingin dihapus: ")) 
+
+            index_transaksi = nomor_transaksi - 1
+
+            if(index_transaksi < 0 or index_transaksi >= len(riwayat_transaksi)):
+                print("Nomor tidak valid \n")
+
+            transaksi_dipilih = riwayat_transaksi[index_transaksi]
+            print("\n=== Transaksi yang Akan Dihapus ===")
+            print(
+                f"Jenis    : "
+                f"{transaksi_dipilih['jenis'].capitalize()}"
+            )
+            print(
+                f"Jumlah   : {mata_uang} "
+                f"{transaksi_dipilih['jumlah']:,}".replace(",", ".")
+            )
+            print(
+                f"Kategori : "
+                f"{transaksi_dipilih['kategori'].title()}"
+            )
+            print("====================================")
+
+            konfirmasi = input("Yakin ingin menghapus transaksi ini? (y/n):").strip().lower()
+            if konfirmasi == "y":
+                transactions.hapus_transaksi(riwayat_transaksi, index_transaksi)
+                saldo = transactions.hitung_saldo(riwayat_transaksi)
+                print("Transaksi berhasil dihapus.\n")
+
+            elif konfirmasi == "n":
+                print("Penghapusan transaksi dibatalkan.\n")
+            else:
+                print("Pilihan konfirmasi tidak valid.\n ")
+
+            
+        except ValueError:
+            print("Input tidak valid. Silahkan masukan angka")
+
+
+    elif menu == "8":
         print("Terima kasih telah menggunakan aplikasi ini!")
         break
     else:

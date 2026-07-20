@@ -56,3 +56,10 @@ def input_kategori(pesan):
             print("Kategori tidak boleh kosong. Silakan coba lagi.\n")
             continue
         return kategori
+    
+def hapus_transaksi(
+        riwayat_transaksi, 
+        index
+):
+    riwayat_transaksi.pop(index)
+    storage.save_data(riwayat_transaksi)
