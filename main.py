@@ -1,6 +1,6 @@
 import storage
 import transactions
-
+import utils
 
 def tampilkan_menu():
     print("1. Tambah pemasukan")
@@ -33,7 +33,7 @@ def lihat_riwayat_transaksi(riwayat_transaksi, mata_uang):
         for nomor, transaksi in enumerate(riwayat_transaksi, start=1):
             print(f"Nomor   : {nomor}")
             print(f"Jenis   : {transaksi['jenis'].capitalize()}")
-            print(f"Jumlah  : {mata_uang} {transaksi['jumlah']:,}".replace(",", "."))
+            print(f"Jumlah  : {utils.format_currency(mata_uang, transaksi['jumlah'])}")
             print(f"Kategori: {transaksi['kategori'].title()}")
             print("------------------------------")
 
@@ -67,12 +67,13 @@ while True:
         else:
             saldo = transactions.tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran, riwayat_transaksi)
             print("------------------------------")
-            print(f"Pengeluaran berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo:,}\n")
+            print(f"Pengeluaran berhasil ditambahkan. \nSaldo Anda saat ini: {utils.format_rupiah(mata_uang, saldo)}\n")
             print("------------------------------")
 
     elif menu == "3":
         saldo = transactions.hitung_saldo(riwayat_transaksi)
-        print(f"Saldo saat ini: Rp {saldo:,}".replace(",", "."))    
+        print(f"Saldo saat ini: {utils.format_currency(mata_uang, saldo)}")
+            
         
     elif menu == "4":
         lihat_riwayat_transaksi(riwayat_transaksi, mata_uang)
@@ -86,7 +87,7 @@ while True:
             if kategori_dicari.lower() in transaksi["kategori"].lower():
                 print("------------------------------")
                 print(f"Jenis    : {transaksi['jenis'].capitalize()}")
-                print(f"Jumlah   : {mata_uang} {transaksi['jumlah']:,}".replace(",", "."))
+                print(f"Jumlah   : {utils.format_currency(mata_uang, transaksi['jumlah'])}")
                 print(f"Kategori : {transaksi['kategori'].title()}")
                 print("------------------------------")
                 ditemukan = True 
@@ -107,7 +108,7 @@ while True:
                     continue
                 print("\n=== Transaksi yang dipilih ===")
                 print(f"Jenis    : {riwayat_transaksi[index_edit]['jenis'].capitalize()}")
-                print(f"Jumlah   : {mata_uang} {riwayat_transaksi[index_edit]['jumlah']:,}".replace(",", "."))
+                print(f"Jumlah   : {utils.format_currency(mata_uang, transaksi['jumlah'])}")
                 print(f"Kategori : {riwayat_transaksi[index_edit]['kategori'].title()}")
                 print("===============================")
                 print(f"\nAnda ingin mengedit apa?")
@@ -181,8 +182,7 @@ while True:
                 f"{transaksi_dipilih['jenis'].capitalize()}"
             )
             print(
-                f"Jumlah   : {mata_uang} "
-                f"{transaksi_dipilih['jumlah']:,}".replace(",", ".")
+                f"Jumlah   : {utils.format_currency(mata_uang, transaksi['jumlah'])}"
             )
             print(
                 f"Kategori : "
