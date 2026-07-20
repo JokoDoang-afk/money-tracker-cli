@@ -1,3 +1,5 @@
+from operator import index
+
 import storage
 import transactions
 
@@ -50,23 +52,23 @@ while True:
     tampilkan_menu()
     menu = input("Pilih menu (1/2/3/4/5/6/7): ")
     if menu == "1":
-            jumlah_pemasukan = input_jumlah("Masukkan jumlah pemasukan: ")
-            kategori_pemasukan = input("Masukkan kategori pemasukan: ") 
-            saldo = transactions.tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan, riwayat_transaksi)
-            print("------------------------------")
-            print(f"Pemasukan berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo:,}\n")
-            print("------------------------------")
+        jumlah_baru = input_jumlah("Masukkan jumlah transaksi baru: ")
+        kategori_pemasukan = input("Masukkan kategori pemasukan: ")
+        saldo = transactions.tambah_pemasukan(saldo, jumlah_baru, kategori_pemasukan, riwayat_transaksi)
+        print("------------------------------")
+        print(f"Pemasukan berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo:,}\n")
+        print("------------------------------")
 
     elif menu == "2":
-            jumlah_pengeluaran = input_jumlah("Silakan masukkan jumlah pengeluaran: ")
-            kategori_pengeluaran = input("Masukkan kategori pengeluaran: ")
-            if jumlah_pengeluaran > saldo:
-                print("Maaf, saldo Anda tidak cukup untuk melakukan pengeluaran ini.")
-            else:
-                saldo = transactions.tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran, riwayat_transaksi)
-                print("------------------------------")
-                print(f"Pengeluaran berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo:,}\n")
-                print("------------------------------")
+        jumlah_pengeluaran = input_jumlah("Silakan masukkan jumlah pengeluaran: ")
+        kategori_pengeluaran = input("Masukkan kategori pengeluaran: ")
+        if jumlah_pengeluaran > saldo:
+            print("Maaf, saldo Anda tidak cukup untuk melakukan pengeluaran ini.")
+        else:
+            saldo = transactions.tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran, riwayat_transaksi)
+            print("------------------------------")
+            print(f"Pengeluaran berhasil ditambahkan. \nSaldo Anda saat ini: {mata_uang} {saldo:,}\n")
+            print("------------------------------")
 
     elif menu == "3":
         saldo = transactions.hitung_saldo(riwayat_transaksi)
@@ -115,29 +117,39 @@ while True:
                 pilihan_edit = input("Pilih opsi (1/2/3): ")
                 if pilihan_edit == "1":
                     jumlah_baru = input_jumlah("Masukkan jumlah transaksi baru: ")
-                    transactions.hitung_saldo(riwayat_transaksi)
-                    riwayat_transaksi[index_edit]["jumlah"] = jumlah_baru
+                    transactions.edit_transaksi(
+                        riwayat_transaksi,
+                        index_edit,
+                        jumlah_baru=jumlah_baru
+                    )
                     saldo = transactions.hitung_saldo(riwayat_transaksi)
-                    storage.save_data(riwayat_transaksi)
-                    print("Jumlah transaksi berhasil diperbarui.\n\n")
+                    print("Jumlah transaksi berhasil diperbarui.\n")
+
                 elif pilihan_edit == "2":
-                    kategori_baru = input("Masukkan kategori transaksi baru: ".strip())
+                    kategori_baru = input("Masukkan kategori transaksi baru: ").strip()
                     if not kategori_baru:
                         print("Kategori tidak boleh kosong.\n\n")
                         continue
-                    riwayat_transaksi[index_edit]["kategori"] = kategori_baru
+                    transactions.edit_transaksi(
+                        riwayat_transaksi,
+                        index_edit,
+                        kategori_baru=kategori_baru
+                    )
                     storage.save_data(riwayat_transaksi)
                     print("Kategori transaksi berhasil diperbarui.\n\n")
                 elif pilihan_edit == "3":
                     jumlah_baru = input_jumlah("Masukkan jumlah transaksi baru: ")
-                    kategori_baru = input("Masukkan kategori transaksi baru: ".strip())
+                    kategori_baru = input("Masukkan kategori transaksi baru: ").strip()
                     if not kategori_baru:
                         print("Kategori tidak boleh kosong.\n\n")
                         continue
-                    transaksi_lama = riwayat_transaksi[index_edit]
+                    transactions.edit_transaksi(
+                        riwayat_transaksi,
+                        index_edit,
+                        jumlah_baru=jumlah_baru,
+                        kategori_baru=kategori_baru
+                    )
                     saldo = transactions.hitung_saldo(riwayat_transaksi)
-                    riwayat_transaksi[index_edit]["jumlah"] = jumlah_baru
-                    riwayat_transaksi[index_edit]["kategori"] = kategori_baru
                     storage.save_data(riwayat_transaksi)
                     print("Transaksi berhasil diperbarui.\n\n")
                 else:
