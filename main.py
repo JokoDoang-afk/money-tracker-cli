@@ -109,9 +109,9 @@ while True:
                     continue
                 transaksi_dipilih = riwayat_transaksi[index_edit]
                 print("\n=== Transaksi yang dipilih ===")
-                print(f"Jenis    : {riwayat_transaksi[index_edit]['jenis'].capitalize()}")
+                print(f"Jenis    : {transaksi_dipilih['jenis'].capitalize()}")
                 print(f"Jumlah   : {utils.format_currency(mata_uang, transaksi_dipilih['jumlah'])}")
-                print(f"Kategori : {riwayat_transaksi[index_edit]['kategori'].title()}")
+                print(f"Kategori : {transaksi_dipilih['kategori'].title()}")
                 print("===============================")
                 print(f"\nAnda ingin mengedit apa?")
                 print("1. Edit Jumlah transaksi")
