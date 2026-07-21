@@ -2,7 +2,16 @@ import display
 import storage
 import transactions
 import utils
+import logging
 
+
+logging.basicConfig(
+    filename="app.log",
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
+
+logging.info("Application started")
 
 def input_jumlah(pesan):
     while True:
@@ -190,6 +199,7 @@ while True:
 
 
     elif menu == "8":
+        logging.info("Application closed")
         print("Terima kasih telah menggunakan aplikasi ini!")
         break
     else:
