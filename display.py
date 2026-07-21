@@ -20,7 +20,9 @@ def lihat_riwayat_transaksi(riwayat_transaksi, mata_uang):
     print("Riwayat Transaksi:")
     
     for nomor, transaksi in enumerate(riwayat_transaksi, start=1):
+            tanggal = transaksi.get("tanggal")
             print(f"Nomor   : {nomor}")
+            print(f"Tanggal : {tanggal}")
             print(f"Jenis   : {transaksi['jenis'].capitalize()}")
             print(
                  f"Jumlah  : "

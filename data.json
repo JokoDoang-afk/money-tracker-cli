@@ -1,1 +1,19 @@
-[]
+[
+    {
+        "jenis": "pemasukan",
+        "jumlah": 25555,
+        "kategori": "gaji",
+        "tanggal": "2026-07-22"
+    },
+    {
+        "jenis": "pengeluaran",
+        "jumlah": 25000,
+        "kategori": "jajan",
+        "tanggal": "2026-07-22"
+    },
+    {
+        "jenis": "pengeluaran",
+        "jumlah": 25000,
+        "kategori": "jajan"
+    }
+]

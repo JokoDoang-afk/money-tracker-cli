@@ -1,11 +1,13 @@
 import storage
+from datetime import date 
 
 def tambah_pemasukan(saldo, jumlah_pemasukan, kategori_pemasukan, riwayat_transaksi):
     saldo += jumlah_pemasukan
     transaksi = {
         "jenis": "pemasukan",
         "jumlah": jumlah_pemasukan,
-        "kategori": kategori_pemasukan
+        "kategori": kategori_pemasukan,
+        "tanggal" : date.today().isoformat()
     }
     riwayat_transaksi.append(transaksi)
     storage.save_data(riwayat_transaksi)
@@ -18,7 +20,8 @@ def tambah_pengeluaran(saldo, jumlah_pengeluaran, kategori_pengeluaran, riwayat_
     transaksi = {
         "jenis": "pengeluaran",
         "jumlah": jumlah_pengeluaran,
-        "kategori": kategori_pengeluaran
+        "kategori": kategori_pengeluaran,
+        "tanggal" : date.today().isoformat()
     }
     riwayat_transaksi.append(transaksi)
     storage.save_data(riwayat_transaksi)
