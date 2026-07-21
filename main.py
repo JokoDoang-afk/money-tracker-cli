@@ -143,8 +143,9 @@ while True:
         print("=== Hapus Transaksi ===")
         if not riwayat_transaksi:
             print("Belum ada transaksi yang dilakukan.\n")
-        else:
-            display.lihat_riwayat_transaksi(
+            continue
+
+        display.lihat_riwayat_transaksi(
             riwayat_transaksi,
             mata_uang
         )
