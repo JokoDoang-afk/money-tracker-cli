@@ -1,15 +1,15 @@
 import logging
 
+import config
 import display
 import storage
 import transactions
 import utils
-import config
 
 
 
 logging.basicConfig(
-    filename="app.log",
+    filename=config.LOG_FILE,
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s"
 )
@@ -27,12 +27,12 @@ def input_jumlah(pesan):
         except ValueError:
             print("Input tidak valid. Silakan masukkan angka.\n\n")
 
-#nama_user = input("Masukkan nama Anda: ")
+nama_user = input("Masukkan nama Anda: ")
 riwayat_transaksi = storage.load_data()
 saldo = transactions.hitung_saldo(riwayat_transaksi)
 
 
-#print(f"Selamat datang, {nama_user.upper()}!")
+print(f"Selamat datang, {nama_user.upper()}!")
 print(f"\n\n========== {config.APP_NAME} ==========\n")
 print("Menu Aplikasi:\n")
 while True:
@@ -90,7 +90,7 @@ while True:
             print("Belum ada transaksi yang dilakukan.\n\n")
         else:
             for index_transaksi, transaksi in enumerate(riwayat_transaksi):
-                print(f"{index_transaksi + 1}. Jenis: {transaksi['jenis'].capitalize()}, Jumlah: {utils.format_currency(config.DEFAULT_CURRENCY)}, Kategori: {transaksi['kategori'].title()}")
+                print(f"{index_transaksi + 1}. Jenis: {transaksi['jenis'].capitalize()}, Jumlah: {utils.format_currency(config.DEFAULT_CURRENCY, transaksi['jumlah'])}, Kategori: {transaksi['kategori'].title()}")
             try:
                 index_edit = int(input("\nMasukkan nomor transaksi yang ingin diedit: ")) - 1
                 if index_edit < 0 or index_edit >= len(riwayat_transaksi):
