@@ -1,8 +1,10 @@
+import logging
+
 import display
 import storage
 import transactions
 import utils
-import logging
+
 
 
 logging.basicConfig(
