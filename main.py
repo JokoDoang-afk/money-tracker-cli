@@ -16,19 +16,6 @@ def input_jumlah(pesan):
             print("Input tidak valid. Silakan masukkan angka.\n\n")
 
 
-def lihat_riwayat_transaksi(riwayat_transaksi, mata_uang):
-    if not riwayat_transaksi:
-        print("Belum ada transaksi yang dilakukan.\n\n")
-    else:
-        print("Riwayat Transaksi:")
-        for nomor, transaksi in enumerate(riwayat_transaksi, start=1):
-            print(f"Nomor   : {nomor}")
-            print(f"Jenis   : {transaksi['jenis'].capitalize()}")
-            print(f"Jumlah  : {utils.format_currency(mata_uang, transaksi['jumlah'])}")
-            print(f"Kategori: {transaksi['kategori'].title()}")
-            print("------------------------------")
-
-
 nama_app = "Money Tracking App"
 nama_user = input("Masukkan nama Anda: ")
 mata_uang = "IDR"
@@ -67,7 +54,10 @@ while True:
             
         
     elif menu == "4":
-        lihat_riwayat_transaksi(riwayat_transaksi, mata_uang)
+        display.lihat_riwayat_transaksi(
+            riwayat_transaksi, 
+            mata_uang
+            )
         print("\n\n")
                     
     elif menu == "5":
@@ -154,7 +144,7 @@ while True:
         if not riwayat_transaksi:
             print("Belum ada transaksi yang dilakukan.\n")
         else:
-            lihat_riwayat_transaksi(
+            display.lihat_riwayat_transaksi(
             riwayat_transaksi,
             mata_uang
         )
