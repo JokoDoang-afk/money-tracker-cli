@@ -18,5 +18,10 @@
         "jenis": "pengeluaran",
         "jumlah": 250000,
         "kategori": "jajan"
+    },
+    {
+        "jenis": "pemasukan",
+        "jumlah": 250000,
+        "kategori": "gaji"
     }
 ]
