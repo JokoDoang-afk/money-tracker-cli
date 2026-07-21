@@ -1,17 +1,7 @@
 import storage
 import transactions
 import utils
-
-
-def tampilkan_menu():
-    print("1. Tambah pemasukan")
-    print("2. Tambah pengeluaran")
-    print("3. Lihat saldo")
-    print("4. Lihat riwayat transaksi")
-    print("5. Cari transaksi berdasarkan kategori")
-    print("6. Edit transaksi")
-    print("7. Hapus transaksi")
-    print("8. Keluar\n")
+import display
 
 
 def input_jumlah(pesan):
@@ -50,7 +40,7 @@ print(f"Selamat datang, {nama_user.upper()}!")
 print(f"\n\n========== {nama_app} ==========\n")
 print("Menu Aplikasi:\n")
 while True:
-    tampilkan_menu()
+    display.tampilkan_menu()
     menu = input("Pilih menu (1/2/3/4/5/6/7/8): ")
     if menu == "1":
         jumlah_pemasukan = input_jumlah("Masukkan jumlah transaksi baru: ")
