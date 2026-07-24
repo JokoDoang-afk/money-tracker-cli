@@ -1,19 +1,14 @@
 [
     {
         "jenis": "pemasukan",
-        "jumlah": 25555,
+        "jumlah": 3000000,
         "kategori": "gaji",
         "tanggal": "2026-07-22"
     },
     {
         "jenis": "pengeluaran",
-        "jumlah": 25000,
+        "jumlah": 25999,
         "kategori": "jajan",
         "tanggal": "2026-07-22"
-    },
-    {
-        "jenis": "pengeluaran",
-        "jumlah": 25000,
-        "kategori": "jajan"
     }
 ]

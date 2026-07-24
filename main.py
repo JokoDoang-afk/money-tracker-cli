@@ -2,10 +2,10 @@ import logging
 
 import config
 import display
+import report
 import storage
 import transactions
 import utils
-
 
 
 logging.basicConfig(
@@ -37,7 +37,7 @@ print(f"\n\n========== {config.APP_NAME} ==========\n")
 print("Menu Aplikasi:\n")
 while True:
     display.tampilkan_menu()
-    menu = input("Pilih menu (1/2/3/4/5/6/7/8): ")
+    menu = input("Pilih menu (1/2/3/4/5/6/7/8/9): ")
     if menu == "1":
         jumlah_pemasukan = input_jumlah("Masukkan jumlah transaksi baru: ")
         kategori_pemasukan = input("Masukkan kategori pemasukan: ")
@@ -59,8 +59,7 @@ while True:
 
     elif menu == "3":
         saldo = transactions.hitung_saldo(riwayat_transaksi)
-        print(f"Saldo saat ini: {utils.format_currency(config.DEFAULT_CURRENCY, saldo)}\n")
-            
+        print(f"Saldo saat ini: {utils.format_currency(config.DEFAULT_CURRENCY, saldo)}\n")           
         
     elif menu == "4":
         display.lihat_riwayat_transaksi(
@@ -199,6 +198,22 @@ while True:
 
 
     elif menu == "8":
+        bulan = int(input("Masukan bulan: "))
+        tahun = int(input("Masukan tahun: "))
+
+        laporan = report.buat_laporan_bulanan(
+            riwayat_transaksi,
+            bulan,
+            tahun
+        )
+        display.tampilkan_laporan_bulanan(
+            laporan,
+            bulan,
+            tahun
+        )
+
+
+    elif menu == "9":
         logging.info("Application closed")
         print("Terima kasih telah menggunakan aplikasi ini!")
         break
